@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{{user}}
+{% endblock title %}
+
+{% block content %}
+
+<h3>{{user.email}}</h3>
+<strong>followers following</strong>
+{% if user.profile_pic %}
+
+<img src="{{user.profile_pic.url}}" alt="profile images">
+{% elif user.male %}
+<img src="{% static 'imgs/deflt _prof_m.png' %}" alt="profile images" width="100px" height="100px">
+{% elif user.male == False %}
+<p>running else</p>
+<img src="{% static 'imgs/deflt_prof_f.png' %}" alt="profile images" width="100px" height="100px">
+{% endif %}
+
+<br>
+
+{% endblock %}
