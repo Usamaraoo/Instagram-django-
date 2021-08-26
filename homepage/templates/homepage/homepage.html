@@ -1,12 +1,27 @@
 {% extends "base.html" %}
 {% block title %}
-Instagrame
+Instagram
 {% endblock title %}
 
 {% block content %}
+<strong><a href="{% url 'post' %}">Post</a></strong>
+{% for p in posts %}
+<ul style="border: 1px solid;">
+    <li>
+        <h3>{{p}}</h3>
+    </li>
+    <ul>
+        <li>
+            {% if user in p.like.all %}
+            <a href="{% url 'liked' p.id %}">Liked {{p.like.all.count}}</a>
+            {% else %}
+            <a href="{% url 'liked' p.id %}">Like </a>
+            {% endif %}
+            <p> {{p.get_comments.count}} comments..</p>
+        </li>
+    </ul>
+</ul>
 
-<h3>This is home page</h3>
-
-<a href="{% url 'profile' %}">Profile</a>
+{% endfor %}
 
 {% endblock %}
