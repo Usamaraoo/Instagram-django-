@@ -1,23 +1,57 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-{{user}}
+{{profile_user}}
 {% endblock title %}
-
+{% block additionalStyles %}
+<link rel="stylesheet" href="{% static 'app_users/css/profile.css'  %}">
+{% endblock %}
 {% block content %}
 
-<h3>{{user.email}}</h3>
-<strong>followers following</strong>
-{% if user.profile_pic %}
+<div class="profile_follow">
+    {% if profile_user.profile_pic %}
+    <img src="{{profile_user.profile_pic.url}}" alt="profile images" class="profile_img">
+    {% elif profile_user.male %}
+    <img src="{% static 'imgs/deflt _prof_m.png' %}" alt="profile images" class="profile_img">
+    {% elif profile_user.male == False %}
+    <img src="{% static 'imgs/deflt_prof_f.png' %}" alt="profile images" class="profile_img">
+    {% endif %}
+    <div class="follow_div">
+        <div class="pst">
+            <strong style="margin: 15px;">{{user_posts.count}}</strong>
+            <br>
+            <strong><a href="#"> Posts</a></strong>
+        </div>
+        <div class="flwr">
+            <strong style="margin: 15px;">{{profile_user.followers.count}}</strong>
+            <br>
+            <strong><a href="#"> followers</a></strong>
+        </div>
+        <div class="flwng">
+            <strong style="margin: 15px;">{{profile_user.following.count}}</strong>
+            <br>
+            <strong><a href="#"> following</a></strong>
+        </div>
+    </div>
+    <h5 style="margin-left: 10px; margin-top: 10px;"><strong>{{profile_user.username}}</strong> </h5>
+</div>
 
-<img src="{{user.profile_pic.url}}" alt="profile images">
-{% elif user.male %}
-<img src="{% static 'imgs/deflt _prof_m.png' %}" alt="profile images" width="100px" height="100px">
-{% elif user.male == False %}
-<p>running else</p>
-<img src="{% static 'imgs/deflt_prof_f.png' %}" alt="profile images" width="100px" height="100px">
+<!-- Following -->
+{% if user != profile_user %}
+<div class="flw_msg">
+    <h4 class="flw_btn"><a href="{% url 'follow_unfollow' profile_user.id %}">
+            {% if profile_user in user.following.all %}
+            unfollow{%else%}follow{%endif%}</a></h4>
+    <h4 class="flw_btn"><a href="#">message</a></h4>
+</div>
 {% endif %}
-
+<!-- END -->
 <br>
-
+<hr>
+<!-- User POSTS -->
+<div class="posts">
+    {% for p in user_posts %}
+    <img src="{{p.post_img.url}}" alt="" width="180px" height="165px">
+    {% endfor %}
+</div>
 {% endblock %}

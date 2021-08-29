@@ -1,13 +1,23 @@
 {% extends "base.html" %}
-{% block title %}
-Post
-{% endblock title %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Post{% endblock title %}
+{% block additionalStyles %}
+<link rel="stylesheet" href="{% static 'app_users/css/post.css'  %}">
+{% endblock %}
 
 {% block content %}
-<form method="POST">
+<form method="post" enctype='multipart/form-data'>
+
     {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit">
+
+
+    {% render_field form.post_img class="btn"%}
+
+    {% render_field form.description class="dscrptn" placeholder="discription...."%}
+
+    <br>
+    <input type="submit" value="Add" class="btn btn-success">
 
 </form>
 

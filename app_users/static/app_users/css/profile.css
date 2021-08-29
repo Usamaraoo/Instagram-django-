@@ -1,0 +1,62 @@
+
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+    display: inline;
+}
+.profile_follow{
+    /* border: 1px solid black; */
+    margin-left: 20px;
+
+
+}
+.follow_div {
+    margin-right: 0px;
+    width: 347px;
+    float: right;
+    /* border: 1px solid black; */
+    margin-top: 51px;
+}
+
+
+.flw_msg{
+    display: inline;
+    margin-left: 40px;
+}
+.flw_btn{
+    float: left;
+    border: 1px solid rgb(199, 199, 199);
+    width: 245px;
+    margin-left: 30px;
+    /* padding-left: 40px;
+    padding-right: 40px; */
+    font-size: 22px;
+}
+.flw_btn a{
+    display: table;
+    margin: auto ;
+}
+/* .flw_btn a{
+    margin-left: 20px; */
+/* } */
+.profile_img{
+width: 120px;
+height: 120px;
+border-radius: 50%;
+display: inline;
+}
+.pst,.flwr,.flwng{
+    float: left;
+    font-size: 18px;
+    margin-right: 20px;
+    /* border: 1px solid black; */
+}
+.posts{
+    margin-left: 10px;
+}
+.posts > img{
+    margin-top: 5px;
+}

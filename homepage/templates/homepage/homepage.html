@@ -1,27 +1,114 @@
 {% extends "base.html" %}
-{% block title %}
-Instagram
-{% endblock title %}
+{% load static %}
+{% block title %}Instagram{% endblock title %}
+{% block additionalStyles %}
+
+<link rel="stylesheet" href="{% static 'homepage/css/home.css' %}">{% endblock %}
 
 {% block content %}
-<strong><a href="{% url 'post' %}">Post</a></strong>
-{% for p in posts %}
-<ul style="border: 1px solid;">
-    <li>
-        <h3>{{p}}</h3>
-    </li>
-    <ul>
-        <li>
-            {% if user in p.like.all %}
-            <a href="{% url 'liked' p.id %}">Liked {{p.like.all.count}}</a>
-            {% else %}
-            <a href="{% url 'liked' p.id %}">Like </a>
-            {% endif %}
-            <p> {{p.get_comments.count}} comments..</p>
-        </li>
-    </ul>
-</ul>
 
+
+
+{% if posts %}
+{# Stories #}
+<div class="stories" id="st">
+    {% for p in posts %}
+    {% if p.user.profile_pic %}
+    <div class="singlestory">
+        <img src="{{p.user.profile_pic.url}}" class="" alt="">
+        <br>
+        <small>{{p.user.username|slice:":5"}}</small>
+    </div>
+
+    {% elif p.user.male %}
+    <div class="singlestory">
+        <img src="{% static 'imgs/deflt _prof_m.png' %}" class="">
+        <br>
+        <small>{{p.user.username|slice:":5"}}</small>
+    </div>
+    {% elif p.user.male == False %}
+    <div class="singlestory">
+        <img src="{% static 'imgs/deflt_prof_f.png' %}" class="">
+        <br>
+        <small>{{p.user.username|slice:":5"}}</small>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{# END Stories #}
+
+{% for p in posts %}
+<div>
+    {# POST #}
+    <div class="post_div">
+        <div class="name_dp">
+            <a href="{% url 'profile' p.user.username %}">
+                <div>
+                    {% if p.user.profile_pic %}
+                    <img src="{{p.user.profile_pic.url}}" alt="profile images" class="post_dp">
+                    {% elif p.user.male %}
+                    <img src="{% static 'imgs/deflt _prof_m.png' %}" class="post_dp">
+                    {% elif p.user.male == False %}
+                    <img src="{% static 'imgs/deflt_prof_f.png' %}" class="post_dp">
+                    {% endif %}
+                </div>
+                <strong style="display: inline-block; margin-left: 7px;">{{p.user.username}}</strong>
+                <img src="{% static 'resource_imgs/threedot.svg' %}" style="float: right;" alt="setting"
+                    class="footer_icons">
+            </a>
+        </div>
+        <img src="{{p.post_img.url}}" alt="postimg" class='postimg'>
+        <div style="margin-top: 8px;">
+            <strong>{{p.user.username}}</strong><span class="description">{{p}}</span>
+        </div>
+        <div class="like_cmnt">
+
+            <a href="javascript:;" class="likeimg" onclick="liked({{p.id}})">
+                <svg id='{{p.id}}' style="width: 33px; height: 33px;" class="footer_icons" {% if user in p.like.all%}
+                    fill='red' {%endif%}>
+                    <use xlink:href="/static/resource_imgs/svgs/free.svg#cil-heart"></use>
+                </svg>
+            </a>
+            <a style="margin-left: 20px;" href="#"><img src="{% static 'resource_imgs/comment.png' %}"
+                    class="footer_icons" alt="comment"> </a>
+            <p type="button" class="collapsible"> view {{p.get_comments.count}} comments..</p>
+            {% comment %} Comments To Show {% endcomment %}
+
+            <div class="content">
+
+                {% for c in p.get_comments %}
+                {% if c.cmnt_user.profile_pic %}
+                <img src="{{c.cmnt_user.profile_pic.url}}" alt="profile images" class="post_dp">
+                {% elif p.user.male %}
+                <img src="{% static 'imgs/deflt _prof_m.png' %}" class="post_dp">
+                {% elif p.user.male == False %}
+                <img src="{% static 'imgs/deflt_prof_f.png' %}" class="post_dp">
+                {% endif %}
+                <div class="cmnt_div">
+                    <strong>{{c.cmnt_user.username}}</strong>
+                    <p>{{c.comment}}. <span style="color: gray; font-size: 14px;">{{c.gen_time|timesince}}</span></p>
+
+                </div>
+                {% endfor %}
+                {# Add comment #}
+                <form method="POST" id="cmntpost{{p.id}}" onsubmit="add_comment(event,{{p.id}})"> {% csrf_token %}
+                    <input id="cmntinput{{p.id}}" class="cmntinput" type="text" placeholder="add comment">
+                    <input type="submit" value="add" class="btn btn-success btn-sm">
+                </form>
+
+            </div>
+
+            {% comment %} End Comment section {% endcomment %}
+        </div>
+    </div>
+    {# EndPOST #}
+</div>
 {% endfor %}
+{% else %}
+<h1>No Post yet</h1>
+{% endif %}
+
+<script src=" {% static 'homepage/js/home.js' %}">
+</script>
 
 {% endblock %}

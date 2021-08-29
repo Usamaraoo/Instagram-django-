@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from datetime import datetime
+from datetime import date, datetime
 from .manager import CustomUserManager
+from datetime import datetime
 
 
 class InstaUser(AbstractBaseUser, PermissionsMixin):
@@ -26,7 +27,7 @@ class InstaUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Post(models.Model):
-    post_img = models.ImageField(null=True, blank=True)
+    post_img = models.ImageField(upload_to='posts/')
     description = models.CharField(max_length=300, null=True, blank=True)
     user = models.ForeignKey(
         InstaUser, related_name='user', null=True, on_delete=models.CASCADE)
@@ -43,6 +44,7 @@ class Comment(models.Model):
     comment = models.CharField(max_length=200)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     cmnt_user = models.ForeignKey(InstaUser, on_delete=models.CASCADE)
+    gen_time = models.DateTimeField(default=datetime.now(), blank=True)
 
     def __str__(self):
         return self.comment

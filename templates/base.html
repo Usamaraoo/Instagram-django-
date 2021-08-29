@@ -12,17 +12,23 @@
     </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    {# jquery #}
 
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     {% block additionalStyles %}{% endblock %}
 
 
 </head>
 
-<body>
-    {% include "includes/nav.html" %}
-    <div class="homepage" style="width: 1200px; margin: auto;">
+<body style="background-color: grey;">
+    <div style="width: 600px; margin: auto;background-color: white; min-height: 800px;">
+        {% include "includes/nav.html" %}
+
         {% block content %}{% endblock content %}
+        {% include "includes/footer.html" %}
+
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>

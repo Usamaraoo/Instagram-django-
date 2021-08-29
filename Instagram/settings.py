@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'app_users',
     'homepage',
     # 3rd party packages
+    'widget_tweaks',
 ]
 
 AUTH_USER_MODEL = 'app_users.InstaUser'

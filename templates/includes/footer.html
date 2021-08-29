@@ -1,0 +1,61 @@
+{% load static %}
+<style>
+    .footer {
+        margin-left: 493px;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        height: 50px;
+        width: 37.9%;
+        border-top: 1px solid black;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .footer_icons {
+        width: 35px;
+        height: 35px;
+    }
+
+    .footer_img {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+    }
+
+    .container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+    }
+
+    .container>a {
+        margin-top: 6px;
+    }
+</style>
+
+
+<footer class="footer">
+
+    <div class="container">
+        <a href="{% url 'homepage' %}" class=""><img src="{% static 'resource_imgs/home.svg' %}" class="footer_icons "
+                alt="home"></a>
+        <a href="{% url 'homepage' %}" class=""><img src="{% static 'resource_imgs/explore.svg' %}"
+                class="footer_icons " alt="home"></a>
+        <a href="{% url 'post' %}" class=""><img src="{% static 'resource_imgs/upload.svg' %}" class="footer_icons "
+                alt="home"></a>
+
+        <a href="{% url 'homepage' %}" class=""><img src="{% static 'resource_imgs/heart.png' %}" class="footer_icons "
+                alt="home"></a>
+        {# Profile Pic #}
+        <a href="{% url 'profile' user.username %}" class="">
+            {% if user.profile_pic %}
+            <img src="{{user.profile_pic.url}}" alt="profile images" class="footer_img">
+            {% elif user.male %}
+            <img src="{% static 'imgs/deflt _prof_m.png' %}" alt="profile images" class="footer_img">
+            {% elif user.male == False %}
+            <img src="{% static 'imgs/deflt_prof_f.png' %}" alt="profile images" class="footer_img">
+            {% endif %}
+        </a>
+        {# END #}
+    </div>
+</footer>
