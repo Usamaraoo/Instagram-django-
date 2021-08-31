@@ -43,3 +43,15 @@ def follow_unfollow(request, pk):
         user_to_follow.followers.remove(request.user)
         request.user.following.remove(user_to_follow)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def following_view(request):
+    # if pk is None:
+    flwrs = request.user.followers.all()
+    flwng = request.user.following.all()
+    # else:
+    # user = InstaUser.objects.filter(id=pk)
+    # flwrs = user.followers.all()
+    # flwng = user.following.all()
+    context = {'flwrs': flwrs, 'flwing': flwng}
+    return render(request, 'app_users/follow.html', context)

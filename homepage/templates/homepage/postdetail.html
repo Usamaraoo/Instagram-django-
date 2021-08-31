@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+{% block additionalStyles %}
+<link rel="stylesheet" href="{% static 'homepage/css/detail.css'  %}">{% endblock %}
+{% block title %}Post{% endblock title %}
+
+{% block content %}
+
+<div class="detail_main">
+    <div class="post">
+        <div class="name_dp">
+            <a href="{% url 'profile' post.user.username %}">
+                <div>
+                    {% if post.user.profile_pic %}
+                    <img src="{{post.user.profile_pic.url}}" alt="profile images" class="post_dp">
+                    {% elif post.user.male %}
+                    <img src="{% static 'imgs/deflt _prof_m.png' %}" class="post_dp">
+                    {% elif post.user.male == False %}
+                    <img src="{% static 'imgs/deflt_prof_f.png' %}" class="post_dp">
+                    {% endif %}
+                </div>
+                <strong class="username">{{post.user.username}}</strong>
+                <img src="{% static 'resource_imgs/threedot.svg' %}" style="float: right; margin-top: 5px;"
+                    alt="setting" class="footer_icons">
+            </a>
+        </div>
+        <div class="">
+            <img src="{{post.post_img.url}}" alt="img" class="postimg" ondblclick="liked({{post.id}})">
+            <div class="dscrptn">
+                <strong>{{post.user.username}}</strong><span style="margin-left: 5px;">{{post.description}}</span>
+            </div>
+            <div class="like_cmnt">
+                <a href="javascript:;" class="" onclick="liked({{post.id}})">
+                    <svg id='{{post.id}}' style="width: 33px; height: 33px;" class="">
+                        <use xlink:href="/static/resource_imgs/svgs/free.svg#cil-heart"></use>
+                    </svg>
+                </a>
+                <a style="margin-left: 20px;" href="#"><img src="{% static 'resource_imgs/comment.png' %}"
+                        class="footer_icons" alt="comment"> </a>
+                <hr>
+                <h5><strong> Comments</strong></h5>
+                {% comment %} Comments To Show {% endcomment %}
+
+                <div class="content">
+
+                    {% for c in post.get_comments %}
+                    {% if c.cmnt_user.profile_pic %}
+                    <img src="{{c.cmnt_user.profile_pic.url}}" alt="profile images" class="post_dp">
+                    {% elif post.user.male %}
+                    <img src="{% static 'imgs/deflt _prof_m.png' %}" class="post_dp">
+                    {% elif post.user.male == False %}
+                    <img src="{% static 'imgs/deflt_prof_f.png' %}" class="post_dp">
+                    {% endif %}
+                    <div class="cmnt_div">
+                        <strong>{{c.cmnt_user.username}}</strong>
+                        <p>{{c.comment}}. <span style="color: gray; font-size: 14px;">{{c.gen_time|timesince}}</span>
+                        </p>
+
+                    </div>
+                    {% endfor %}
+                    {# Add comment #}
+                    <form method="POST" id="cmntpost{{post.id}}" onsubmit="add_comment(event,{{post.id}})">
+                        {%csrf_token %}
+                        <input id="cmntinput{{post.id}}" class="cmntinput" type="text" placeholder="add comment">
+                        <input type="submit" value="add" class="btn btn-success btn-sm">
+                    </form>
+
+                </div>
+
+                {% comment %} End Comment section {% endcomment %}
+            </div>
+        </div>
+        {# EndPOST #}
+
+    </div>
+</div>
+</div>
+</div>
+<script src=" {% static 'homepage/js/detail.js' %}">
+</script>
+
+
+
+{% endblock %}

@@ -25,12 +25,12 @@
         <div class="flwr">
             <strong style="margin: 15px;">{{profile_user.followers.count}}</strong>
             <br>
-            <strong><a href="#"> followers</a></strong>
+            <strong><a href="{% url 'followunfollow' %}"> followers</a></strong>
         </div>
         <div class="flwng">
             <strong style="margin: 15px;">{{profile_user.following.count}}</strong>
             <br>
-            <strong><a href="#"> following</a></strong>
+            <strong><a href="{% url 'followunfollow' %}"> following</a></strong>
         </div>
     </div>
     <h5 style="margin-left: 10px; margin-top: 10px;"><strong>{{profile_user.username}}</strong> </h5>

@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Local apps
-    'app_users',
+    'app_users.apps.AppUsersConfig',
     'homepage',
     # 3rd party packages
     'widget_tweaks',

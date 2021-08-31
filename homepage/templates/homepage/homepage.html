@@ -57,7 +57,7 @@
                     class="footer_icons">
             </a>
         </div>
-        <img src="{{p.post_img.url}}" alt="postimg" class='postimg'>
+        <img src="{{p.post_img.url}}" alt="postimg" class='postimg' ondblclick="liked({{p.id}})">
         <div style="margin-top: 8px;">
             <strong>{{p.user.username}}</strong><span class="description">{{p}}</span>
         </div>

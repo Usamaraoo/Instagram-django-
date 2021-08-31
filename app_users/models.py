@@ -50,6 +50,14 @@ class Comment(models.Model):
         return self.comment
 
 
-# class Like(models.Model):
-#     liked_post = models.ForeignKey(Post, on_delete=models.CASCADE)
-#     like_user = models.ManyToManyField(InstaUser, blank=True)
+class Notification(models.Model):
+    notify = models.CharField(max_length=100)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    to_user = models.ForeignKey(
+        InstaUser, related_name='notify', on_delete=models.CASCADE)
+    from_user = models.ForeignKey(InstaUser, on_delete=models.CASCADE)
+    active = models.BooleanField(default=True)
+    gen_time = models.DateTimeField(default=datetime.now(), blank=True)
+
+    def __str__(self):
+        return self.notify

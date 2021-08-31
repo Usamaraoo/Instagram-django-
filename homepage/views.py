@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from app_users.models import (InstaUser, Post, Comment)
+from app_users.models import (InstaUser, Post, Comment, Notification)
 
 
 # Create your views here.
@@ -9,6 +9,8 @@ from app_users.models import (InstaUser, Post, Comment)
 
 def homepage_view(request):
     posts = Post.objects.all()
+    notificaton = Notification.objects.filter(
+        to_user=request.user, active=True)
     context = {'posts': posts}
     return render(request, 'homepage/homepage.html', context)
 
@@ -34,11 +36,34 @@ def liked_view(request):
     if request.user in post.like.all():
         post.like.remove(request.user)
         post.save()
+
     else:
         liked = True
         post.like.add(request.user)
         post.save()
+        Notification.objects.create(
+            notify='liked your post', post=post, from_user=request.user, to_user=post.user)
+
     data = {
         'status': liked
     }
     return JsonResponse(data)
+
+
+def notification_view(request):
+    nots = Notification.objects.filter(to_user=request.user)
+    print('hehe', nots)
+    context = {'notifications': nots}
+    return render(request, 'homepage/notificationlist.html', context)
+
+
+def explore_view(request):
+    post = Post.objects.all()
+    context = {'posts': post}
+    return render(request, 'homepage/explore.html', context)
+
+
+def post_detail(request, pk):
+    post = Post.objects.get(id=pk)
+    context = {'post': post}
+    return render(request, 'homepage/postdetail.html', context)

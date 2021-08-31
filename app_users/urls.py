@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (user_profile, signup_view, login_view,
-                    post_view, follow_unfollow)
+                    post_view, follow_unfollow, following_view)
 
 urlpatterns = [
     path('profile/<str:username>', user_profile, name='profile'),
@@ -8,5 +8,6 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('post/', post_view, name='post'),
     path('follow/<int:pk>', follow_unfollow, name='follow_unfollow'),
+    path('follow_view/', following_view, name='followunfollow'),
 
 ]

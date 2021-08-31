@@ -31,6 +31,11 @@
     .container>a {
         margin-top: 6px;
     }
+
+    .notfction {
+        position: absolute;
+        color: red;
+    }
 </style>
 
 
@@ -39,13 +44,16 @@
     <div class="container">
         <a href="{% url 'homepage' %}" class=""><img src="{% static 'resource_imgs/home.svg' %}" class="footer_icons "
                 alt="home"></a>
-        <a href="{% url 'homepage' %}" class=""><img src="{% static 'resource_imgs/explore.svg' %}"
-                class="footer_icons " alt="home"></a>
+        <a href="{% url 'explore' %}" class=""><img src="{% static 'resource_imgs/explore.svg' %}" class="footer_icons "
+                alt="home"></a>
         <a href="{% url 'post' %}" class=""><img src="{% static 'resource_imgs/upload.svg' %}" class="footer_icons "
                 alt="home"></a>
 
-        <a href="{% url 'homepage' %}" class=""><img src="{% static 'resource_imgs/heart.png' %}" class="footer_icons "
-                alt="home"></a>
+        <a href="{% url 'notifications' %}" class="">
+            <svg id='{{p.id}}' style="width: 33px; height: 33px;" class="footer_icons" fill='red'>
+                <use xlink:href="/static/resource_imgs/svgs/free.svg#cil-heart"></use>
+            </svg>
+        </a>
         {# Profile Pic #}
         <a href="{% url 'profile' user.username %}" class="">
             {% if user.profile_pic %}

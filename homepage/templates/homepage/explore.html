@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block additionalStyles %}
+<link rel="stylesheet" href="{% static 'homepage/css/explore.css'  %}">{% endblock %}
+{% block title %}Explore{% endblock title %}
+
+
+{% block content %}
+<div class="">
+    <h4>Explore</h4>
+    <div class="img_section">
+        {% for p in posts %}
+        <a href="{% url 'post_detail' p.id %}">
+            <img src="{{p.post_img.url}}" alt="img" width="140px" height="130px" style="object-fit: cover;">
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+.notifypostimg{
+    width: 50px;
+    height: 50px;
+    object-fit: fill;
+    margin-left: 40px;
+    border-radius: 10%;
+
+}
+.post_dp{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.single{
+    
+    padding: 10px;
+    /* border: 1px solid black; */
+}
