@@ -42,7 +42,7 @@ function add_comment(e, postid) {
         success: function (data) {
             $('#cmntinput' + postid).val('') // clearing input field
             form = document.getElementById('cmntpost' + postid)
-            div = document.getElementsByClassName('content')[postid - 1]
+            div = document.getElementsByClassName(postid)[0]
             img = document.createElement('img')
             inner_div = document.createElement('div') // inner div
             inner_div.classList.add('cmnt_div');

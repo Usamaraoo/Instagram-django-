@@ -33,6 +33,8 @@ INSTALLED_APPS = [
     # 3rd party packages
     'widget_tweaks',
 ]
+# LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'app_users.InstaUser'
 MIDDLEWARE = [

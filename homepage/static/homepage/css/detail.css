@@ -44,6 +44,9 @@ a, a:hover, a:focus, a:active {
     margin-left: 15px;
     margin-top: 10px;
 }
+video{
+    margin-left: 35px;
+}
 
 .like_cmnt{
     margin-left: 15px;

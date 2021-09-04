@@ -42,6 +42,7 @@
 <footer class="footer">
 
     <div class="container">
+
         <a href="{% url 'homepage' %}" class=""><img src="{% static 'resource_imgs/home.svg' %}" class="footer_icons "
                 alt="home"></a>
         <a href="{% url 'explore' %}" class=""><img src="{% static 'resource_imgs/explore.svg' %}" class="footer_icons "
@@ -50,19 +51,17 @@
                 alt="home"></a>
 
         <a href="{% url 'notifications' %}" class="">
-            <svg id='{{p.id}}' style="width: 33px; height: 33px;" class="footer_icons" fill='red'>
+
+            <svg id='{{p.id}}' style="width: 33px; height: 33px;" class="footer_icons" 
+            {% if request.session.active_not%} fill='red' {% endif %}>
                 <use xlink:href="/static/resource_imgs/svgs/free.svg#cil-heart"></use>
             </svg>
         </a>
         {# Profile Pic #}
         <a href="{% url 'profile' user.username %}" class="">
-            {% if user.profile_pic %}
-            <img src="{{user.profile_pic.url}}" alt="profile images" class="footer_img">
-            {% elif user.male %}
-            <img src="{% static 'imgs/deflt _prof_m.png' %}" alt="profile images" class="footer_img">
-            {% elif user.male == False %}
-            <img src="{% static 'imgs/deflt_prof_f.png' %}" alt="profile images" class="footer_img">
-            {% endif %}
+
+            <img src="{{user.img_url}}" alt="profile images" class="footer_img">
+
         </a>
         {# END #}
     </div>

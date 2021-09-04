@@ -9,7 +9,7 @@ a, a:hover, a:focus, a:active {
   
 .stories{
    margin-left: 50px;
-    max-width:100%;
+    max-width:84%;
     max-height: 72px;
     border-bottom: 0.5px solid rgb(231, 231, 231);
    overflow: hidden;

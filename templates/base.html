@@ -22,10 +22,17 @@
 
 <body style="background-color: grey;">
     <div style="width: 600px; margin: auto;background-color: white; min-height: 800px;">
+
+
         {% include "includes/nav.html" %}
 
+
         {% block content %}{% endblock content %}
+        {% if user.is_authenticated %}
+
         {% include "includes/footer.html" %}
+
+        {% endif %}
 
     </div>
 

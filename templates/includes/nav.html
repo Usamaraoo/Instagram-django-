@@ -32,16 +32,26 @@
     .msg {
         width: 30px;
         margin-top: -40px;
-        margin-left: 555px;
+        margin-left: 520px;
+        margin-right: 45px;
+    }
 
-
-
+    .logout {
+        float: left;
+        width: 20px;
+        height: 20px;
+        margin-top: 10px;
+        margin-left: 45px;
     }
 </style>
 <nav class="nav">
     <!-- <img src="{% static 'resource_imgs/camera.png' %}" class="cam" /> -->
     <div>
+        <a href="{% url 'logout' %}">
+            <img src="{% static 'resource_imgs/logout.svg' %}" class=" logout" />
+        </a>
         <div class="heaer_logo">
+
             <img src="https://i.imgur.com/zqpwkLQ.png" class="logo" />
         </div>
     </div>

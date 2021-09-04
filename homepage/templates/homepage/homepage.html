@@ -11,53 +11,47 @@
 
 {% if posts %}
 {# Stories #}
-<div class="stories" id="st">
-    {% for p in posts %}
-    {% if p.user.profile_pic %}
-    <div class="singlestory">
-        <img src="{{p.user.profile_pic.url}}" class="" alt="">
-        <br>
-        <small>{{p.user.username|slice:":5"}}</small>
-    </div>
 
-    {% elif p.user.male %}
+<div class="stories" id="st">
+    {% for user in request.user.following.all %}
+
     <div class="singlestory">
-        <img src="{% static 'imgs/deflt _prof_m.png' %}" class="">
+        <img src="{{user.img_url}}" class="" alt="">
         <br>
-        <small>{{p.user.username|slice:":5"}}</small>
+        <small>{{user.username|slice:":5"}}</small>
     </div>
-    {% elif p.user.male == False %}
-    <div class="singlestory">
-        <img src="{% static 'imgs/deflt_prof_f.png' %}" class="">
-        <br>
-        <small>{{p.user.username|slice:":5"}}</small>
-    </div>
-    {% endif %}
     {% endfor %}
 </div>
 {# END Stories #}
 
 {% for p in posts %}
 <div>
+    {% if p.user in request.user.following.all %}
+
     {# POST #}
     <div class="post_div">
         <div class="name_dp">
             <a href="{% url 'profile' p.user.username %}">
                 <div>
-                    {% if p.user.profile_pic %}
-                    <img src="{{p.user.profile_pic.url}}" alt="profile images" class="post_dp">
-                    {% elif p.user.male %}
-                    <img src="{% static 'imgs/deflt _prof_m.png' %}" class="post_dp">
-                    {% elif p.user.male == False %}
-                    <img src="{% static 'imgs/deflt_prof_f.png' %}" class="post_dp">
-                    {% endif %}
+
+                    <img src="{{p.user.img_url}}" alt="profile images" class="post_dp">
+
                 </div>
                 <strong style="display: inline-block; margin-left: 7px;">{{p.user.username}}</strong>
                 <img src="{% static 'resource_imgs/threedot.svg' %}" style="float: right;" alt="setting"
                     class="footer_icons">
             </a>
         </div>
+        <!-- Checking if the file is image or vidoe -->
+        {% if p.media_type_html == "image" %}
         <img src="{{p.post_img.url}}" alt="postimg" class='postimg' ondblclick="liked({{p.id}})">
+        {% else %}
+        <video width='500' controls muted>
+            <source src="{{p.post_img.url}}" type='video/mp4'>
+            Your browser does not support the video tag.
+        </video>
+        {% endif %}
+        <!-- ENd Check -->
         <div style="margin-top: 8px;">
             <strong>{{p.user.username}}</strong><span class="description">{{p}}</span>
         </div>
@@ -69,13 +63,11 @@
                     <use xlink:href="/static/resource_imgs/svgs/free.svg#cil-heart"></use>
                 </svg>
             </a>
-            <a style="margin-left: 20px;" href="#"><img src="{% static 'resource_imgs/comment.png' %}"
-                    class="footer_icons" alt="comment"> </a>
+            <a style="margin-left: 20px;"><img src="{% static 'resource_imgs/comment.png' %}" class="footer_icons"
+                    alt="comment"> </a>
             <p type="button" class="collapsible"> view {{p.get_comments.count}} comments..</p>
-            {% comment %} Comments To Show {% endcomment %}
-
-            <div class="content">
-
+            <!-- Comment Section-->
+            <div class="content {{p.id}}">
                 {% for c in p.get_comments %}
                 {% if c.cmnt_user.profile_pic %}
                 <img src="{{c.cmnt_user.profile_pic.url}}" alt="profile images" class="post_dp">
@@ -97,17 +89,19 @@
                 </form>
 
             </div>
-
-            {% comment %} End Comment section {% endcomment %}
+            <!--END Comment Section-->
         </div>
     </div>
     {# EndPOST #}
+    {% endif %}
+
 </div>
 {% endfor %}
 {% else %}
 <h1>No Post yet</h1>
 {% endif %}
-
+<br><br>
+<br><br>
 <script src=" {% static 'homepage/js/home.js' %}">
 </script>
 

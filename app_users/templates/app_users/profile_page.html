@@ -9,13 +9,7 @@
 {% block content %}
 
 <div class="profile_follow">
-    {% if profile_user.profile_pic %}
-    <img src="{{profile_user.profile_pic.url}}" alt="profile images" class="profile_img">
-    {% elif profile_user.male %}
-    <img src="{% static 'imgs/deflt _prof_m.png' %}" alt="profile images" class="profile_img">
-    {% elif profile_user.male == False %}
-    <img src="{% static 'imgs/deflt_prof_f.png' %}" alt="profile images" class="profile_img">
-    {% endif %}
+    <img src="{{profile_user.img_url}}" alt="profile images" class="profile_img">
     <div class="follow_div">
         <div class="pst">
             <strong style="margin: 15px;">{{user_posts.count}}</strong>
@@ -39,10 +33,15 @@
 <!-- Following -->
 {% if user != profile_user %}
 <div class="flw_msg">
-    <h4 class="flw_btn"><a href="{% url 'follow_unfollow' profile_user.id %}">
+    <!-- href="{% url 'follow_unfollow' profile_user.id %}" -->
+    <a id='follow' onclick="follow('{{profile_user.username}}')" style="background-color: brown;">
+        <h4 class="flw_btn btn"
+            style="background-color: {% if profile_user not in  user.following.all %} rgb(98, 169, 216);{%else%} rgb(112, 223, 78);{%endif%}">
             {% if profile_user in user.following.all %}
-            unfollow{%else%}follow{%endif%}</a></h4>
-    <h4 class="flw_btn"><a href="#">message</a></h4>
+            unfollow{%else%}follow{%endif%}
+        </h4>
+    </a>
+    <h4 class="flw_btn  btn"><a href="#">message</a></h4>
 </div>
 {% endif %}
 <!-- END -->
@@ -54,4 +53,5 @@
     <img src="{{p.post_img.url}}" alt="" width="180px" height="165px">
     {% endfor %}
 </div>
+<script src="{% static 'app_users/js/profile.js' %}"></script>
 {% endblock %}

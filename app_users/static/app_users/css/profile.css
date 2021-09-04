@@ -31,8 +31,7 @@ a, a:hover, a:focus, a:active {
     border: 1px solid rgb(199, 199, 199);
     width: 245px;
     margin-left: 30px;
-    /* padding-left: 40px;
-    padding-right: 40px; */
+    padding: 6px;
     font-size: 22px;
 }
 .flw_btn a{

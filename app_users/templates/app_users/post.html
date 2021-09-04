@@ -7,18 +7,17 @@
 {% endblock %}
 
 {% block content %}
-<form method="post" enctype='multipart/form-data'>
+<div class="postmain">
+    <form method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        {% render_field form.post_img class="btn imginput" size="60"%}
+        {% render_field form.description class="dscrptn" placeholder="discription...."%}
 
-    {% csrf_token %}
+        <br>
 
+        <input type="submit" value="Add" class="btn "
+            style="background-color: rgb(98, 169, 216) !important; border: none; margin-left: 170px; width: 200px;">
 
-    {% render_field form.post_img class="btn"%}
-
-    {% render_field form.description class="dscrptn" placeholder="discription...."%}
-
-    <br>
-    <input type="submit" value="Add" class="btn btn-success">
-
-</form>
-
+    </form>
+</div>
 {% endblock %}

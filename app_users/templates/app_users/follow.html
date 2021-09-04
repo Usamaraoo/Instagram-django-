@@ -13,14 +13,7 @@
         <h3>followers</h3>
         {% for f in flwrs %}
         <div class="singlediv">
-            {% if f.profile_pic %}
-
-            <img src="{{f.profile_pic.url}}" alt="profile images" class="post_dp">
-            {% elif f.male %}
-            <img src="{% static 'imgs/deflt _prof_m.png' %}" class="post_dp">
-            {% elif f.male == False %}
-            <img src="{% static 'imgs/deflt_prof_f.png' %}" class="post_dp">
-            {% endif %}
+            <img src="{{f.img_url}}" alt="profile images" class="post_dp">
             <span style="margin-left: 5px;">{{f.username|slice:":10"}}</span>
             <a href="{% url 'follow_unfollow' f.id %}" class="btn btn-primary btn-sm">
                 {% if f in user.following.all %}
@@ -33,13 +26,7 @@
         <h3>following</h3>
         {% for f in flwing %}
         <div class="singlediv">
-            {% if f.profile_pic %}
-            <img src="{{f.profile_pic.url}}" alt="profile images" class="post_dp">
-            {% elif f.male %}
-            <img src="{% static 'imgs/deflt _prof_m.png' %}" class="post_dp">
-            {% elif f.male == False %}
-            <img src="{% static 'imgs/deflt_prof_f.png' %}" class="post_dp">
-            {% endif %}
+            <img src="{{f.img_url}}" alt="profile images" class="post_dp">
             <span style="margin-left: 5px;">{{f.username|slice:":10"}}</span>
             <a href="" class="btn btn-primary btn-sm"> following</a>
 

@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from datetime import date, datetime
 from .manager import CustomUserManager
 from datetime import datetime
+from .validators import file_size
+from mimetypes import guess_type
 
 
 class InstaUser(AbstractBaseUser, PermissionsMixin):
@@ -21,14 +23,26 @@ class InstaUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
     objects = CustomUserManager()
 
+    # This method will return the profile image if exits otherwise set defaul
+    def img_url(self):
+        if self.profile_pic.name is '':
+            if self.male is True:
+                return '/static/imgs/deflt _prof_m.png'
+            else:
+                return '/static/imgs/deflt_prof_f.png'
+
+        else:
+            return self.profile_pic.url
+
     # def save(self, *args, **kwargs):
     #     self.profile_pic.url = BASE_DIR+'/media/prof_pic'
     #     super().save(*args, **kwargs)
 
 
 class Post(models.Model):
-    post_img = models.ImageField(upload_to='posts/')
+    post_img = models.FileField(upload_to='posts/', validators=[file_size])
     description = models.CharField(max_length=300, null=True, blank=True)
+    gen_time = models.DateTimeField(default=datetime.now(), blank=True)
     user = models.ForeignKey(
         InstaUser, related_name='user', null=True, on_delete=models.CASCADE)
     like = models.ManyToManyField(InstaUser, blank=True)
@@ -38,6 +52,17 @@ class Post(models.Model):
 
     def get_comments(self):
         return Comment.objects.filter(post=self)
+
+    def media_type_html(self):
+        """
+        guess_type returns a tuple like (type, encoding) and we want to access
+        the type of media file in first index of tuple
+        """
+        type_tuple = guess_type(self.post_img.url, strict=True)
+        if (type_tuple[0]).__contains__("image"):
+            return "image"
+        elif (type_tuple[0]).__contains__("video"):
+            return "video"
 
 
 class Comment(models.Model):

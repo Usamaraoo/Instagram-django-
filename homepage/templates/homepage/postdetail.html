@@ -25,7 +25,17 @@
             </a>
         </div>
         <div class="">
-            <img src="{{post.post_img.url}}" alt="img" class="postimg" ondblclick="liked({{post.id}})">
+            <!-- Checking if the file is image or vidoe -->
+            {% if post.media_type_html == "image" %}
+            <img src="{{post.post_img.url}}" alt="postimg" class='postimg' ondblclick="liked({{post.id}})">
+            {% else %}
+            <video width='500' style="margin-left: 35px;" controls autoplay loop muted>
+                <source src="{{post.post_img.url}}" type='video/mp4'>
+                Your browser does not support the video tag.
+            </video>
+            {% endif %}
+            <!-- ENd Check -->
+            <!-- <img src="{{post.post_img.url}}" alt="img" class="postimg" ondblclick="liked({{post.id}})"> -->
             <div class="dscrptn">
                 <strong>{{post.user.username}}</strong><span style="margin-left: 5px;">{{post.description}}</span>
             </div>
