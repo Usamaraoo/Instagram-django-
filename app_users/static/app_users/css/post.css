@@ -3,15 +3,29 @@
 }
 
 .postmain{
+  /* border: 1px solid black; */
 margin-left: 10px;
 margin-right: 10px;
 margin-top: 5px;
+}
+#shwimg{
+  /* border: 1px solid red; */
+  width: 300px;
+  height: 300px;
+  margin: auto;
+}
+#shwimg img{
+  max-width:300px;
+  max-height:300px;
+  
+  object-fit: contain;
+
 }
 
 .imginput{
   margin-left: 30px;
   width: 500px;
-  height: 300px;
+  height:40px;
 }
 .dscrptn{
     margin-top: 20px;
@@ -25,7 +39,7 @@ margin-top: 5px;
     font-size: 20px;
     font-weight: bold;
     width: 500px;
-    height: 200px;
+    height: 150px;
 }
   
 input[type=file] {

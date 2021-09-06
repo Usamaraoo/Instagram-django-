@@ -8,6 +8,8 @@
 
 {% block content %}
 <div class="postmain">
+    <div id="shwimg">
+    </div>
     <form method="post" enctype='multipart/form-data'>
         {% csrf_token %}
         {% render_field form.post_img class="btn imginput" size="60"%}
@@ -15,9 +17,10 @@
 
         <br>
 
-        <input type="submit" value="Add" class="btn "
+        <input type="submit" value="post" class="btn "
             style="background-color: rgb(98, 169, 216) !important; border: none; margin-left: 170px; width: 200px;">
 
     </form>
 </div>
+<script src="{% static 'app_users/js/post.js' %}"></script>
 {% endblock %}
