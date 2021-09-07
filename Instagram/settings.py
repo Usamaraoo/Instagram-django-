@@ -27,14 +27,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+
     # Local apps
     'app_users.apps.AppUsersConfig',
     'homepage',
     # 3rd party packages
     'widget_tweaks',
 ]
-# LOGIN_REDIRECT_URL = '/'
-# LOGOUT_REDIRECT_URL = '/'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'homepage'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
 
 AUTH_USER_MODEL = 'app_users.InstaUser'
 MIDDLEWARE = [
@@ -46,7 +51,26 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.linkedin.LinkedinOAuth2',
+    'social_core.backends.instagram.InstagramOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
+# FACEBOOK Auth
+SOCIAL_AUTH_FACEBOOK_KEY = 1019764011928183        # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '4daaf0057457f5bfe138214d98f3d50a'  # App Secret
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id, name, email, picture.type(large), link'
+}
+SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
+    ('name', 'name'),
+    ('email', 'email'),
+    ('picture', 'picture'),
+    ('link', 'profile_url'),
+]
 ROOT_URLCONF = 'Instagram.urls'
 
 TEMPLATES = [

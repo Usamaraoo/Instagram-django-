@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-
+from django.db.models import Q
 from .forms import PostForm, LoginForm, SignUpForm
 from .models import InstaUser, Post
 
@@ -24,13 +24,13 @@ def signup_view(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             print('valid')
-            form.save()
+            user = form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             print('username', username, 'password', raw_password)
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-
+            # user = authenticate(username=username, password=raw_password)
+            # print(user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('/')
         else:
             print(form.errors)
@@ -63,7 +63,7 @@ def logout_view(request):
     return redirect('/')
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def post_view(request):
     form = PostForm()
     if request.method == 'POST':
@@ -77,7 +77,7 @@ def post_view(request):
     return render(request, 'app_users/post.html', context)
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def follow_unfollow(request, pk):
     user_to_follow = InstaUser.objects.get(id=pk)
     if request.user not in user_to_follow.followers.all():
@@ -91,21 +91,23 @@ def follow_unfollow(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def following_view(request):
     # if pk is None:
     flwrs = request.user.followers.all()
     flwng = request.user.following.all()
+    peoplemayknow = InstaUser.objects.filter(~Q(id__in=[o.id for o in flwng]))
     # else:
     # user = InstaUser.objects.filter(id=pk)
     # flwrs = user.followers.all()
     # flwng = user.following.all()
-    context = {'flwrs': flwrs, 'flwing': flwng}
+    context = {'flwrs': flwrs, 'flwing': flwng, 'peoplemayknow': peoplemayknow}
     return render(request, 'app_users/follow.html', context)
 
 
 def follow_ajax(request):
     followed = False
+    print('user came', request.GET.get('username', None))
     user = InstaUser.objects.get(username=request.GET.get('username', None))
     if user is not None:
         if user not in request.user.following.all():

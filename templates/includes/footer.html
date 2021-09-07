@@ -1,18 +1,19 @@
 {% load static %}
 <style>
     .footer {
-        margin-left: 493px;
+
         position: fixed;
-        left: 0;
+        left: 524px;
         bottom: 0;
         height: 50px;
-        width: 37.9%;
+        width: 550px;
         border-top: 1px solid gray;
-        border-left: 6px solid black;
-        border-bottom: 10px solid black;
+        border-left: 2px solid black;
+        border-bottom: 4px solid black;
         border-right: 6px solid black;
         background-color: rgb(255, 255, 255);
     }
+
 
     .footer_icons {
         width: 35px;
@@ -25,11 +26,7 @@
         height: 30px;
     }
 
-    .container {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-around;
-    }
+   
 
     .container>a {
         margin-top: 6px;
@@ -39,33 +36,38 @@
         position: absolute;
         color: red;
     }
+    .row{
+        margin-top:3px !important;
+    }
+   
 </style>
 
 
 <footer class="footer">
 
     <div class="container">
+        <div class="row">
+            <a href="{% url 'homepage' %}" class="col"><img src="{% static 'resource_imgs/home.svg' %}"
+                    class="footer_icons " alt="home"></a>
+            <a href="{% url 'explore' %}" class="col-3"><img src="{% static 'resource_imgs/explore.svg' %}"
+                    class="footer_icons " alt="home"></a>
+            <a href="{% url 'post' %}"  class="col-3"><img src="{% static 'resource_imgs/upload.svg' %}" class="footer_icons "id="postimg"
+                    alt="home"></a>
 
-        <a href="{% url 'homepage' %}" class=""><img src="{% static 'resource_imgs/home.svg' %}" class="footer_icons "
-                alt="home"></a>
-        <a href="{% url 'explore' %}" class=""><img src="{% static 'resource_imgs/explore.svg' %}" class="footer_icons "
-                alt="home"></a>
-        <a href="{% url 'post' %}" class=""><img src="{% static 'resource_imgs/upload.svg' %}" class="footer_icons "
-                alt="home"></a>
+            <a href="{% url 'notifications' %}" class="col">
 
-        <a href="{% url 'notifications' %}" class="">
+                <svg id='{{p.id}}' style="width: 33px; height: 33px;" class="footer_icons" 
+                {% if request.session.active_not %} fill='red' {% endif %}>
+                    <use xlink:href="/static/resource_imgs/svgs/free.svg#cil-heart"></use>
+                </svg>
+            </a>
+            {# Profile Pic #}
+            <a href="{% url 'profile' user.username %}" class="col">
 
-            <svg id='{{p.id}}' style="width: 33px; height: 33px;" class="footer_icons" 
-            {% if request.session.active_not%} fill='red' {% endif %}>
-                <use xlink:href="/static/resource_imgs/svgs/free.svg#cil-heart"></use>
-            </svg>
-        </a>
-        {# Profile Pic #}
-        <a href="{% url 'profile' user.username %}" class="">
+                <img src="{{user.img_url}}" alt="profile images" class="footer_img">
 
-            <img src="{{user.img_url}}" alt="profile images" class="footer_img">
-
-        </a>
-        {# END #}
+            </a>
+            {# END #}
+        </div>
     </div>
 </footer>

@@ -3,6 +3,8 @@
 {% block title %}
 Sign Up
 {% endblock title %}
+{% load widget_tweaks %}
+
 {% block additionalStyles %}
 <link rel="stylesheet" href="{% static 'app_users/css/signup.css'  %}">
 {% endblock %}
@@ -13,7 +15,8 @@ Sign Up
         <div class="header">
             <img src="https://i.imgur.com/zqpwkLQ.png">
             <p>Sign up to see photos and videos from your friends.</p>
-            <button><i class="fab fa-facebook-square"></i> Log in with Facebook</button>
+            <button><i class="fab fa-facebook-square"></i><a href="{% url 'social:begin' 'facebook' %}"> Log in with
+                    Facebook</a></button>
             <div>
                 <hr>
                 <p>OR</p>
@@ -21,10 +24,8 @@ Sign Up
             </div>
         </div>
         <div class="container">
-            <form action="">
-                <input type="text" placeholder="Email">
-                <input type="text" placeholder="Username">
-                <input type="password" placeholder="Password">
+            <form method="POST" action="">{% csrf_token %}
+                {{form}}
                 <button>Sign up</button>
             </form>
 

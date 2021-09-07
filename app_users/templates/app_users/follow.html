@@ -28,14 +28,53 @@
         <div class="singlediv">
             <img src="{{f.img_url}}" alt="profile images" class="post_dp">
             <span style="margin-left: 5px;">{{f.username|slice:":10"}}</span>
-            <a href="" class="btn btn-primary btn-sm"> following</a>
+            <a id='follow{{f.id}}' onclick="follow('{{f.username}}','{{f.id}}')" class="btn btn-sm"
+                style="background-color: #84e467 ; float: right; margin-right: 5px;">
+                following</a>
 
         </div>
         {% endfor %}
+        <hr>
+        <strong>you may know</strong>
+        {% for u in peoplemayknow %}
+        <div class="singlediv">
+            <img src="{{u.img_url}}" alt="profile images" class="post_dp">
+            <span style="margin-left: 5px;">{{u.username|slice:":10"}}</span>
+            <a id='follow{{u.id}}' onclick="follow('{{u.username}}','{{u.id}}')" class="btn  btn-sm"
+                style="background-color: rgb(98, 169, 216) ; float: right; margin-right: 5px;">
+                follow</a>
 
+        </div>
+        {% endfor %}
     </div>
 </div>
 
+<script>
+    function follow(username, button_id) {
+        $.ajax({
+            url: '/ajax_follow',
+            data: {
+                'username': username
+            },
+            datatype: 'json',
+            success: function (data) {
+                l = document.getElementById('follow' + button_id)
+                if (data.followed === true) {
+                    l.innerText = "unfollow"
+                    l.style.background = "rgb(112, 223, 78)"
+                }
+                else {
+                    l.innerText = "follow"
+                    l.style.background = " rgb(98, 169, 216)"
+                }
+            },
+            failure: function () {
+                console.log('error');
+            }
+        });
+    }
+
+</script>
 
 
 {% endblock %}

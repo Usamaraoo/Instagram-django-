@@ -9,7 +9,7 @@
 
 
 
-{% if posts %}
+{% if request.user.following.all %}
 {# Stories #}
 
 <div class="stories" id="st">
@@ -44,9 +44,9 @@
         </div>
         <!-- Checking if the file is image or vidoe -->
         {% if p.media_type_html == "image" %}
-        <img src="{{p.post_img.url}}" alt="postimg" class='postimg' ondblclick="liked({{p.id}})">
+        <img src="{{p.post_img.url}}" alt="img" class='postimg' ondblclick="liked({{p.id}})">
         {% else %}
-        <video width='500' controls muted>
+        <video class="videos" controls muted>
             <source src="{{p.post_img.url}}" type='video/mp4'>
             Your browser does not support the video tag.
         </video>
@@ -69,13 +69,7 @@
             <!-- Comment Section-->
             <div class="content {{p.id}}">
                 {% for c in p.get_comments %}
-                {% if c.cmnt_user.profile_pic %}
-                <img src="{{c.cmnt_user.profile_pic.url}}" alt="profile images" class="post_dp">
-                {% elif p.user.male %}
-                <img src="{% static 'imgs/deflt _prof_m.png' %}" class="post_dp">
-                {% elif p.user.male == False %}
-                <img src="{% static 'imgs/deflt_prof_f.png' %}" class="post_dp">
-                {% endif %}
+                <img src="{{c.cmnt_user.img_url}}" alt="profile images" class="post_dp">
                 <div class="cmnt_div">
                     <strong>{{c.cmnt_user.username}}</strong>
                     <p>{{c.comment}}. <span style="color: gray; font-size: 14px;">{{c.gen_time|timesince}}</span></p>
@@ -83,7 +77,8 @@
                 </div>
                 {% endfor %}
                 {# Add comment #}
-                <form method="POST" id="cmntpost{{p.id}}" onsubmit="add_comment(event,{{p.id}})"> {% csrf_token %}
+                <form method="POST" id="cmntpost{{p.id}}" onsubmit="add_comment(event,{{p.id}})">
+                    {% csrf_token %}
                     <input id="cmntinput{{p.id}}" class="cmntinput" type="text" placeholder="add comment">
                     <input type="submit" value="add" class="btn btn-success btn-sm">
                 </form>
@@ -100,8 +95,7 @@
 {% else %}
 <h1>No Post yet</h1>
 {% endif %}
-<br><br>
-<br><br>
+
 <script src=" {% static 'homepage/js/home.js' %}">
 </script>
 

@@ -25,14 +25,20 @@ class InstaUser(AbstractBaseUser, PermissionsMixin):
 
     # This method will return the profile image if exits otherwise set defaul
     def img_url(self):
-        if self.profile_pic.name is '':
-            if self.male is True:
-                return '/static/imgs/deflt _prof_m.png'
-            else:
-                return '/static/imgs/deflt_prof_f.png'
+        # Checking if the user is Facebook user or noraml user
+        try:
+            url = self.social_auth.get(
+                provider='facebook').extra_data['picture']['data']['url']
+            return url
+        except:
+            if self.profile_pic.name is '':
+                if self.male is True:
+                    return '/static/imgs/deflt _prof_m.png'
+                else:
+                    return '/static/imgs/deflt_prof_f.png'
 
-        else:
-            return self.profile_pic.url
+            else:
+                return self.profile_pic.url
 
     # def save(self, *args, **kwargs):
     #     self.profile_pic.url = BASE_DIR+'/media/prof_pic'

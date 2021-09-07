@@ -6,12 +6,22 @@
 
 
 {% block content %}
-<div class="">
+<div class="main">
     <h4>Explore</h4>
     <div class="img_section">
         {% for p in posts %}
         <a href="{% url 'post_detail' p.id %}">
-            <img src="{{p.post_img.url}}" alt="img" width="140px" height="130px" style="object-fit: cover;">
+            <!-- Checking if the file is image or vidoe -->
+
+            {% if p.media_type_html == "image" %}
+            <img src="{{p.post_img.url}}" alt="postimg" class='postimg' ondblclick="liked({{p.id}})">
+            {% else %}
+            <video class="videos" controls muted>
+                <source src="{{p.post_img.url}}" type='video/mp4'>
+                Your browser does not support the video tag.
+            </video>
+            {% endif %}
+            <!-- ENd Check -->
         </a>
         {% endfor %}
     </div>

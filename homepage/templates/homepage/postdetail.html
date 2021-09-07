@@ -11,25 +11,19 @@
         <div class="name_dp">
             <a href="{% url 'profile' post.user.username %}">
                 <div>
-                    {% if post.user.profile_pic %}
-                    <img src="{{post.user.profile_pic.url}}" alt="profile images" class="post_dp">
-                    {% elif post.user.male %}
-                    <img src="{% static 'imgs/deflt _prof_m.png' %}" class="post_dp">
-                    {% elif post.user.male == False %}
-                    <img src="{% static 'imgs/deflt_prof_f.png' %}" class="post_dp">
-                    {% endif %}
+                    <img src="{{post.user.img_url}}" alt="profile images" class="post_dp">
                 </div>
                 <strong class="username">{{post.user.username}}</strong>
                 <img src="{% static 'resource_imgs/threedot.svg' %}" style="float: right; margin-top: 5px;"
                     alt="setting" class="footer_icons">
             </a>
         </div>
-        <div class="">
+        <div>
             <!-- Checking if the file is image or vidoe -->
             {% if post.media_type_html == "image" %}
             <img src="{{post.post_img.url}}" alt="postimg" class='postimg' ondblclick="liked({{post.id}})">
             {% else %}
-            <video width='500' style="margin-left: 35px;" controls autoplay loop muted>
+            <video class="video" style="margin-left: 35px;" controls autoplay loop muted>
                 <source src="{{post.post_img.url}}" type='video/mp4'>
                 Your browser does not support the video tag.
             </video>
@@ -54,13 +48,7 @@
                 <div class="content">
 
                     {% for c in post.get_comments %}
-                    {% if c.cmnt_user.profile_pic %}
-                    <img src="{{c.cmnt_user.profile_pic.url}}" alt="profile images" class="post_dp">
-                    {% elif post.user.male %}
-                    <img src="{% static 'imgs/deflt _prof_m.png' %}" class="post_dp">
-                    {% elif post.user.male == False %}
-                    <img src="{% static 'imgs/deflt_prof_f.png' %}" class="post_dp">
-                    {% endif %}
+                    <img src="{{c.cmnt_user.img_url}}" alt="profile images" class="post_dp">
                     <div class="cmnt_div">
                         <strong>{{c.cmnt_user.username}}</strong>
                         <p>{{c.comment}}. <span style="color: gray; font-size: 14px;">{{c.gen_time|timesince}}</span>

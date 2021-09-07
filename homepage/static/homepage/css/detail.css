@@ -34,10 +34,14 @@ a, a:hover, a:focus, a:active {
 
 }
 .postimg{
-    width:500px;
-    height: 550px;
+    max-width:450px;
+    min-width: 300px;
+    width: 450px;
+
+    max-height: 450px;
+    min-height: 300px;
     margin-left: 35px;
-    object-fit: cover;
+    object-fit: contain;
     
 }
 .dscrptn{
@@ -62,13 +66,14 @@ video{
     height: 60px;
 
   }
-.cmntinput {
-    width: 50%;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    margin-bottom: 100px;
-}
+
 *:focus{
     outline: none;
+}
+.video{
+    min-width: 400px;
+    width: 450px;
+    max-width: 450px;
+    min-height: 220px;
+    max-height: 400px;
 }

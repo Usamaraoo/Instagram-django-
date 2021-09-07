@@ -11,18 +11,15 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='login')
 def homepage_view(request):
 
-    posts = Post.objects.all().order_by('gen_time')
-    # all_notificaton = Notification.objects.filter(
-    #     to_user=request.user)
+    posts = Post.objects.order_by('-gen_time')
     active_not = Notification.objects.filter(
         to_user=request.user, active=True).exists()
     request.session['active_not'] = active_not
-    print(active_not)
     context = {'posts': posts}
     return render(request, 'homepage/homepage.html', context)
 
 
-@csrf_exempt
+@ csrf_exempt
 def comment_view(request):
     if request.is_ajax():
         post = Post.objects.get(id=request.POST.get('post_id', None))
@@ -31,7 +28,8 @@ def comment_view(request):
             comment=cmnt, post=post, cmnt_user=request.user)
         Notification.objects.create(
             post=post, from_user=request.user, to_user=post.user, notify='Commented on your post')
-        img_url = request.user.profile_pic.url if request.user.profile_pic else '/static/resource_imgs/camera.png'
+        print('this is img url', request.user.img_url())
+        img_url = request.user.img_url()
         data = {'comment': comment.comment, 'username': request.user.username,
                 'img_url': img_url}
         return JsonResponse(data)
@@ -59,7 +57,7 @@ def liked_view(request):
     return JsonResponse(data)
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def notification_view(request):
     nots = Notification.objects.filter(
         to_user=request.user).order_by('-gen_time')
@@ -67,14 +65,14 @@ def notification_view(request):
     return render(request, 'homepage/notificationlist.html', context)
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def explore_view(request):
     post = Post.objects.all()
     context = {'posts': post}
     return render(request, 'homepage/explore.html', context)
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def post_detail(request, pk):
     post = Post.objects.get(id=pk)
     Notification.objects.filter(post=post).update(active=False)

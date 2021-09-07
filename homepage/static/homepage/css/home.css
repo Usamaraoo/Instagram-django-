@@ -8,11 +8,11 @@ a, a:hover, a:focus, a:active {
 }
   
 .stories{
-   margin-left: 50px;
-    max-width:84%;
+    margin-left: 20px;
+    max-width: 92.5%;
     max-height: 72px;
     border-bottom: 0.5px solid rgb(231, 231, 231);
-   overflow: hidden;
+    overflow: hidden;
    
 }
 .singlestory{
@@ -21,36 +21,38 @@ a, a:hover, a:focus, a:active {
 }
 .singlestory img{
     border: 2px solid red;
-
+    object-fit: cover;
     width:50px;
     height: 50px;
     border-radius: 50%;
 }
 
 .post_div{
-margin-left: 50px;
+margin-left: 20px;
 }
 .name_dp{
     margin-bottom: 20px;
     margin-top: 10px;
-    margin-right: 50px;
+    margin-right: 20px;
 }
-.postimg {
-    width: 30px;
-    height: 20px;
-}
+
 .post_dp{
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
     float: left;
     border-radius: 50px;
 
 }
-.postimg{
-    width:500px;
-    height: 500px;
-    object-fit: cover;
+.postimg ,.videos{
+
+/* border: 1px solid black; */
+    width: 450px;
+    max-width:450px;
+    max-height: 400px;
+    object-fit: contain;
 }
+
 .description{
     color: rgb(59, 56, 56);
     margin-left: 5px;
@@ -58,17 +60,18 @@ margin-left: 50px;
 
 /* comments */
 .comments_div{
+
     border:  1px solod black;
 }
 .content {
-    padding-left: 8px;
+    
     display: none;
     overflow: hidden;
     background-color: white;
   }
   .cmnt_div{
     /* border:1px solid black; */
-    margin-left: 40px;
+    margin-left: 45px;
 
   }
   .cmnt_div > p{
@@ -77,22 +80,10 @@ margin-left: 50px;
   .cmnt_div > span{
       color: gray;
   }
-  .cmntinput {
-      width: 50%;
-      border-top: none;
-      border-left: none;
-      border-right: none;
-  }
-  .cmntinput > input:hover,input:active,textarea:focus{
-    width: 50%;
-    
-    border-top: none;
-    border-left: none;
-    border-right: none;
-  }
-   *:focus{
-      outline: none;
-  }
+
+ input, input:active,input:focus{
+     border: none;
+ }
   /* .addcmnt{
       color:red;
   } */

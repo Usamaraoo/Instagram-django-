@@ -23,16 +23,17 @@ a, a:hover, a:focus, a:active {
 
 
 .flw_msg{
-    display: inline;
-    margin-left: 40px;
+
+    margin-left: 0px;
+    
 }
 .flw_btn{
     float: left;
     border: 1px solid rgb(199, 199, 199);
-    width: 245px;
-    margin-left: 30px;
+    width: 200px;
     padding: 6px;
     font-size: 22px;
+    margin-left: 27px;
 }
 .flw_btn a{
     display: table;
@@ -46,6 +47,7 @@ width: 120px;
 height: 120px;
 border-radius: 50%;
 display: inline;
+object-fit: cover;
 }
 .pst,.flwr,.flwng{
     float: left;
@@ -56,6 +58,12 @@ display: inline;
 .posts{
     margin-left: 10px;
 }
-.posts > img{
+.posts > img, video{
     margin-top: 5px;
+    width: 140px;
+    height: 130px;
+    object-fit: cover;
+    margin-left: 12px;
+object-fit: cover;
+
 }

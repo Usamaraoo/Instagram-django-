@@ -1,9 +1,15 @@
-*{
+
+  *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
+    font-family: Arial, Helvetica, sans-serif;
+}
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+    display: inline;
+}
   body{
     background-color: #fafafa;
   }

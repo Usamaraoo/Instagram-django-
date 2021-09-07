@@ -3,9 +3,8 @@
 }
 
 .postmain{
-  /* border: 1px solid black; */
-margin-left: 10px;
-margin-right: 10px;
+margin-left: 0px;
+margin-right: 0px;
 margin-top: 5px;
 }
 #shwimg{
@@ -23,14 +22,14 @@ margin-top: 5px;
 }
 
 .imginput{
-  margin-left: 30px;
+  margin-left: 15px;
   width: 500px;
   height:40px;
 }
 .dscrptn{
     margin-top: 20px;
     margin-bottom: 20px;
-    margin-left: 30px;
+    margin-left: 15px;
     border: 2px solid gray;
     color: gray;
     background-color: white;
@@ -52,15 +51,15 @@ input[type=file] {
   cursor: inherit;
   display: block;
 }
-  .btn {
-    border: 2px solid gray;
-    color: black;
-    background-color: white;
-    padding: 8px 20px;
-    border-radius: 8px;
-    font-size: 20px;
-    font-weight: bold;
-  }
+.btn {
+  border: 2px solid gray;
+  color: black;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
   
 
   

@@ -46,11 +46,20 @@
 {% endif %}
 <!-- END -->
 <br>
+<br>
 <hr>
 <!-- User POSTS -->
 <div class="posts">
     {% for p in user_posts %}
-    <img src="{{p.post_img.url}}" alt="" width="180px" height="165px">
+    {% if p.media_type_html == "image" %}
+    <img src="{{p.post_img.url}}" alt="postimg" class='postimg' ondblclick="liked({{post.id}})">
+    {% else %}
+    <video class="video" style="margin-left: 35px;" muted>
+        <source src="{{p.post_img.url}}" type='video/mp4'>
+        Your browser does not support the video tag.
+    </video>
+    {% endif %}
+    <!-- ENd Check -->
     {% endfor %}
 </div>
 <script src="{% static 'app_users/js/profile.js' %}"></script>

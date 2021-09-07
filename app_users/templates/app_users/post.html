@@ -14,12 +14,9 @@
         {% csrf_token %}
         {% render_field form.post_img class="btn imginput" size="60"%}
         {% render_field form.description class="dscrptn" placeholder="discription...."%}
-
         <br>
-
         <input type="submit" value="post" class="btn "
             style="background-color: rgb(98, 169, 216) !important; border: none; margin-left: 170px; width: 200px;">
-
     </form>
 </div>
 <script src="{% static 'app_users/js/post.js' %}"></script>
