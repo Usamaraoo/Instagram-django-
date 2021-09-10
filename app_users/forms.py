@@ -21,3 +21,10 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = InstaUser
         fields = ('username', 'email', 'password1', 'password2')
+
+
+class UserImageForm(forms.ModelForm):
+    # date_of_birth = forms.DateTimeField()
+    class Meta:
+        model = InstaUser
+        fields = ['profile_pic', ]

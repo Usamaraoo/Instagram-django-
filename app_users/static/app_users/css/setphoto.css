@@ -1,0 +1,38 @@
+* { 
+    margin: 0;
+    padding: 0;
+    border: none; 
+}
+body {
+    background-color: gray;
+}
+
+.maindiv{
+    position: relative;
+    margin: auto;
+    max-width: 550px;
+    background-color: white;
+    min-height: 768px;
+    overflow: hidden;
+}
+#image-form{
+    position: relative;
+    margin-top: 50px;
+}
+.not-visible {
+    display: none;
+}
+#confirm-btn{
+    margin-left: 200px;
+    padding-left: 50px;
+    padding-right: 50px;
+
+}
+
+#skipbtn{
+    position: fixed;
+    right: 532px;
+    bottom: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+}

@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.urls.conf import path
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 from app_users.models import (InstaUser, Post, Comment, Notification)
 from django.contrib.auth.decorators import login_required
 
@@ -15,7 +16,11 @@ def homepage_view(request):
     active_not = Notification.objects.filter(
         to_user=request.user, active=True).exists()
     request.session['active_not'] = active_not
-    context = {'posts': posts}
+
+    # In case user dont't follow any one show people to follow
+    flwng = request.user.following.all()
+    peoplemayknow = InstaUser.objects.filter(~Q(id__in=[o.id for o in flwng]))
+    context = {'posts': posts, 'peoplemayknow': peoplemayknow}
     return render(request, 'homepage/homepage.html', context)
 
 

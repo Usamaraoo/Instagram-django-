@@ -42,16 +42,18 @@
                     class="footer_icons">
             </a>
         </div>
-        <!-- Checking if the file is image or vidoe -->
-        {% if p.media_type_html == "image" %}
-        <img src="{{p.post_img.url}}" alt="img" class='postimg' ondblclick="liked({{p.id}})">
-        {% else %}
-        <video class="videos" controls muted>
-            <source src="{{p.post_img.url}}" type='video/mp4'>
-            Your browser does not support the video tag.
-        </video>
-        {% endif %}
-        <!-- ENd Check -->
+        <div class="postimg">
+            <!-- Checking if the file is image or vidoe -->
+            {% if p.media_type_html == "image" %}
+            <img src="{{p.post_img.url}}" alt="img" ondblclick="liked({{p.id}})">
+            {% else %}
+            <video controls muted>
+                <source src="{{p.post_img.url}}" type='video/mp4'>
+                Your browser does not support the video tag.
+            </video>
+            {% endif %}
+            <!-- ENd Check -->
+        </div>
         <div style="margin-top: 8px;">
             <strong>{{p.user.username}}</strong><span class="description">{{p}}</span>
         </div>
@@ -93,7 +95,47 @@
 </div>
 {% endfor %}
 {% else %}
-<h1>No Post yet</h1>
+<h4 style="display: inline-block; margin:5px 30px 30px 135px ; "><strong>Follow people and pages</strong></h4>
+<div class="people">
+    {% for u in peoplemayknow %}
+    <div class="">
+        <img src="{{u.img_url}}" alt="profile images" class="peopledp">
+        <span style="margin-left: 5px;">{{u.username|slice:":10"}}</span>
+        <a id='follow{{u.id}}' onclick="follow('{{u.username}}','{{u.id}}')" class="btn  btn-sm"
+            style="background-color: rgb(98, 169, 216) ; float: right; margin-right: 5px;">
+            follow</a>
+
+    </div>
+    <br>
+    {% endfor %}
+</div>
+<br><br>
+<script>
+    function follow(username, button_id) {
+        $.ajax({
+            url: '/ajax_follow',
+            data: {
+                'username': username
+            },
+            datatype: 'json',
+            success: function (data) {
+                l = document.getElementById('follow' + button_id)
+                if (data.followed === true) {
+                    l.innerText = "unfollow"
+                    l.style.background = "rgb(112, 223, 78)"
+                }
+                else {
+                    l.innerText = "follow"
+                    l.style.background = " rgb(98, 169, 216)"
+                }
+            },
+            failure: function () {
+                console.log('error');
+            }
+        });
+    }
+
+</script>
 {% endif %}
 
 <script src=" {% static 'homepage/js/home.js' %}">

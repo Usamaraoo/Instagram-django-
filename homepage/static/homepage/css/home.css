@@ -6,6 +6,12 @@ a, a:hover, a:focus, a:active {
     color: inherit;
     display: inline;
 }
+.homepage{
+     width: 545px;
+    margin: auto;
+    background-color: white;
+    /* border: 6px solid black; */
+}
   
 .stories{
     margin-left: 20px;
@@ -44,12 +50,13 @@ margin-left: 20px;
     border-radius: 50px;
 
 }
-.postimg ,.videos{
+.postimg img , video{
 
 /* border: 1px solid black; */
     width: 450px;
     max-width:450px;
     max-height: 400px;
+    margin-left: 20px;
     object-fit: contain;
 }
 
@@ -87,3 +94,14 @@ margin-left: 20px;
   /* .addcmnt{
       color:red;
   } */
+  .people{
+      /* border: 1px solid black; */
+      margin: auto;
+      width: 300px;
+  }
+  .peopledp{
+      width: 65px;
+      height: 65px;
+      object-fit: cover;
+      border-radius: 50px;
+  }

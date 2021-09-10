@@ -5,8 +5,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from .forms import PostForm, LoginForm, SignUpForm
-from .models import InstaUser, Post
+from .forms import (PostForm, LoginForm, SignUpForm, UserImageForm)
+from .models import (InstaUser, Post)
 
 
 @login_required(login_url='login')
@@ -31,7 +31,7 @@ def signup_view(request):
             # user = authenticate(username=username, password=raw_password)
             # print(user)
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return redirect('/')
+            return redirect('set_dp')
         else:
             print(form.errors)
     return render(request, 'app_users/signup.html', {'form': form})
@@ -118,3 +118,17 @@ def follow_ajax(request):
 
     data = {'followed': followed}
     return JsonResponse(data)
+
+
+def set_dp(request):
+
+    form = UserImageForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.save(commit=False)
+        dp = form.cleaned_data['profile_pic']
+        request.user.profile_pic = dp
+        request.user.save()
+        return JsonResponse({'message': 'works'})
+    context = {'form': form}
+
+    return render(request, 'app_users/setprofile.html', context)
