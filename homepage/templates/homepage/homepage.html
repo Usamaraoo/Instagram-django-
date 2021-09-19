@@ -9,7 +9,6 @@
 
 
 
-{% if request.user.following.all %}
 {# Stories #}
 
 <div class="stories" id="st">
@@ -23,6 +22,7 @@
     {% endfor %}
 </div>
 {# END Stories #}
+{% if request.user.following.all.1 %}
 
 {% for p in posts %}
 <div>

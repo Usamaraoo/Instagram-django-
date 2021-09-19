@@ -7,6 +7,25 @@ a, a:hover, a:focus, a:active {
     color: inherit;
     display: inline;
 }
+.pro_img{
+    position: relative;
+    display: inline-block;
+    color: white;
+}
+.pro_img a{
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+ opacity: 0%;
+    color: red;
+    transform: translate(-50%, -50%);
+}
+.pro_img a:hover{
+    opacity: 100%;
+    background-color: grey;
+
+}
+
 .profile_follow{
     /* border: 1px solid black; */
     margin-left: 20px;

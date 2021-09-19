@@ -24,3 +24,17 @@ img.addEventListener("change", function () {
         img_show.innerHTML = `<img  src="${url}" width="300px" height="300px"  >`
     }
 });
+
+console.log('New fun');
+
+$("form").submit(function () {
+    console.log('file checkk');
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        var file = $('#id_post_img')[0].files[0];
+
+        if (file && file.size > 2 * 1024 * 1024) {
+            alert("File " + file.name + " of type " + file.type + " is too big");
+            return false;
+        }
+    }
+});

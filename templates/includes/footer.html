@@ -1,16 +1,10 @@
 {% load static %}
 <style>
     .footer {
-
         position: fixed;
-        left: 524px;
         bottom: 0;
-        height: 50px;
-        width: 550px;
+        min-width: 529px;
         border-top: 1px solid gray;
-        border-left: 2px solid black;
-        border-bottom: 4px solid black;
-        border-right: 6px solid black;
         background-color: rgb(255, 255, 255);
     }
 
@@ -26,7 +20,7 @@
         height: 30px;
     }
 
-   
+
 
     .container>a {
         margin-top: 6px;
@@ -36,10 +30,10 @@
         position: absolute;
         color: red;
     }
-    .row{
-        margin-top:3px !important;
+
+    .row {
+        margin-top: 3px !important;
     }
-   
 </style>
 
 
@@ -51,8 +45,8 @@
                     class="footer_icons " alt="home"></a>
             <a href="{% url 'explore' %}" class="col-3"><img src="{% static 'resource_imgs/explore.svg' %}"
                     class="footer_icons " alt="home"></a>
-            <a href="{% url 'post' %}"  class="col-3"><img src="{% static 'resource_imgs/upload.svg' %}" class="footer_icons "id="postimg"
-                    alt="home"></a>
+            <a href="{% url 'post' %}" class="col-3"><img src="{% static 'resource_imgs/upload.svg' %}"
+                    class="footer_icons " id="postimg" alt="home"></a>
 
             <a href="{% url 'notifications' %}" class="col">
 

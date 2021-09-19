@@ -25,6 +25,8 @@ def signup_view(request):
         if form.is_valid():
             print('valid')
             user = form.save()
+            user.following.add(user)
+            user.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             print('username', username, 'password', raw_password)

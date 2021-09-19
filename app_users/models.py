@@ -40,10 +40,6 @@ class InstaUser(AbstractBaseUser, PermissionsMixin):
             else:
                 return self.profile_pic.url
 
-    # def save(self, *args, **kwargs):
-    #     self.profile_pic.url = BASE_DIR+'/media/prof_pic'
-    #     super().save(*args, **kwargs)
-
 
 class Post(models.Model):
     post_img = models.FileField(upload_to='posts/', validators=[file_size])
