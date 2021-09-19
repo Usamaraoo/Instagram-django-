@@ -31,3 +31,4 @@ Implemented features
 | Notifications | Get notification on post likes and comments |
 | Adjustable media | User can overview uploading image or post can edit it |
 
+Checkout the application here [instagram](https://djangoinstagram.herokuapp.com/login/?next=/)
