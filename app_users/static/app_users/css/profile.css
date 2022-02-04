@@ -38,21 +38,26 @@ a, a:hover, a:focus, a:active {
     float: right;
     /* border: 1px solid black; */
     margin-top: 51px;
+    color: rgb(83, 83, 83);
 }
 
 
 .flw_msg{
-
     margin-left: 0px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
     
 }
 .flw_btn{
-    float: left;
+    /* float: left; */
     border: 1px solid rgb(199, 199, 199);
-    width: 200px;
-    padding: 6px;
-    font-size: 22px;
-    margin-left: 27px;
+    width: 160px;
+    padding: 4px;
+    font-size: 18px;
+    margin-right: 5px;
+    /* margin-left: 27px; */
+    color: rgb(83, 83, 83);
 }
 .flw_btn a{
     display: table;
@@ -120,6 +125,7 @@ object-fit: cover;
     }
     .follow_div{
         width: auto;
+
     }
 }
 

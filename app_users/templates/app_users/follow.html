@@ -10,7 +10,8 @@
 
 <div class="mainfollow">
     <div class="leftdiv">
-        <h3>followers</h3>
+        <h3><b>followers</b></h3>
+        {% if flwrs %}
         {% for f in flwrs %}
         <div class="singlediv">
             <img src="{{f.img_url}}" alt="profile images" class="post_dp">
@@ -21,21 +22,28 @@
                 {% endif %} </a>
         </div>
         {% endfor %}
+        {% else %}
+        <h6 style="color:gray;padding-left:20px"><b>No followers yet</b></h6>
+        {% endif %}
     </div>
     <div class="rightdiv">
-        <h3>following</h3>
+        <h3><b>following</b></h3>
+        {% if flwing %}
         {% for f in flwing %}
         <div class="singlediv">
             <img src="{{f.img_url}}" alt="profile images" class="post_dp">
-            <span style="margin-left: 5px;">{{f.username|slice:":2"}}</span>
+            <span style="margin-left: 5px;">{{f.username|slice:":10"}}</span>
             <a id='follow{{f.id}}' onclick="follow('{{f.username}}','{{f.id}}')" class="btn btn-sm"
                 style="background-color: #84e467 ; float: right; margin-right: 5px;">
                 following</a>
 
         </div>
         {% endfor %}
+        {% else %}
+            <h6 style="color:gray;padding-left:20px"><b>Not following anyone yet</b></h6>
+        {% endif %}
         <hr>
-        <strong>you may know</strong>
+        <h3 style=""><b>You may know </b></h3>
         {% for u in peoplemayknow %}
         <div class="singlediv">
             <img src="{{u.img_url}}" alt="profile images" class="post_dp">

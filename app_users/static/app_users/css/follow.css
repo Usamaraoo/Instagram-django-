@@ -16,21 +16,19 @@ h3{
 
 
 .leftdiv{
-    min-height: 700px;
-
-    float: left;
-    width: 50%;
-
-    /* border: 1px solid black; */
-    border-right: 1px solid rgb(190, 190, 190);
-
+    border-bottom: 1px solid rgb(190, 190, 190);
 }
 
 .rightdiv{
-    min-height: 700px;
-    width: 50%;
+    border-right: 1px solid rgb(190, 190, 190);
+
+    /* min-height: 700px; */
+    /* width: 50%; */
     /* border: 1px solid black; */
-    float: right;
+    /* float: right; */
+}
+.mainfollow{
+    padding-bottom: 80px;
 }
 
 .post_dp{

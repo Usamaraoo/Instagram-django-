@@ -34,21 +34,24 @@
             </a>
         </div>
     </div>
-    <h5 style="margin-left: 10px; margin-top: 10px;"><strong>{{profile_user.username}}</strong> </h5>
+    <h5 style="margin-left: 10px; margin-top: 10px; color: rgb(83, 83, 83);"><strong>{{profile_user.username}}</strong>
+    </h5>
 </div>
 
 <!-- Following -->
 {% if user != profile_user %}
 <div class="flw_msg">
     <!-- href="{% url 'follow_unfollow' profile_user.id %}" -->
-    <a id='follow' onclick="follow('{{profile_user.username}}')" style="background-color: brown;">
+    <a id='follow' onclick="follow('{{profile_user.username}}')">
         <h4 class="flw_btn btn"
             style="background-color: {% if profile_user not in  user.following.all %} rgb(98, 169, 216);{%else%} rgb(112, 223, 78);{%endif%}">
-            {% if profile_user in user.following.all %}
-            unfollow{%else%}follow{%endif%}
+            <b>
+                {% if profile_user in user.following.all %}
+                unfollow{%else%}follow{%endif%}
+            </b>
         </h4>
     </a>
-    <h4 class="flw_btn  btn"><a href="#">message</a></h4>
+    <h4 class="flw_btn  btn"><a href="#"> <b>message</b></a></h4>
 </div>
 {% else %}
 <div>
