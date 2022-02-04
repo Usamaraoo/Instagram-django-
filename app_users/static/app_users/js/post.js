@@ -25,7 +25,6 @@ img.addEventListener("change", function () {
     }
 });
 
-console.log('New fun');
 
 $("form").submit(function () {
     console.log('file checkk');

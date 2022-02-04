@@ -37,7 +37,6 @@ a, a:hover, a:focus, a:active {
     max-width:450px;
     min-width: 300px;
     width: 450px;
-
     max-height: 450px;
     min-height: 300px;
     margin-left: 35px;
@@ -77,3 +76,31 @@ video{
     min-height: 220px;
     max-height: 400px;
 }
+
+@media only screen and (max-width: 1200px){
+    /*Tablets [601px -> 1200px]*/
+    .postimg {
+        max-width: 97%;
+        min-width: 97%;
+        margin-left: 0px;
+    }
+  }
+  
+  @media only screen and (max-width: 600px){
+  /*Big smartphones [426px -> 600px]*/
+  .postimg {
+    max-width: 97%;
+    min-width: 97%;
+    margin-left: 0px;
+}
+  }
+  
+  @media only screen and (max-width: 375px){
+  /*Small smartphones [325px -> 425px]*/
+ .postimg {
+    max-width: 97%;
+    min-width: 97%;
+    margin-left: 0px;
+}
+  }
+  

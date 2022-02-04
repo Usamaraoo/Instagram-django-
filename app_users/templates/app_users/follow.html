@@ -27,7 +27,7 @@
         {% for f in flwing %}
         <div class="singlediv">
             <img src="{{f.img_url}}" alt="profile images" class="post_dp">
-            <span style="margin-left: 5px;">{{f.username|slice:":10"}}</span>
+            <span style="margin-left: 5px;">{{f.username|slice:":2"}}</span>
             <a id='follow{{f.id}}' onclick="follow('{{f.username}}','{{f.id}}')" class="btn btn-sm"
                 style="background-color: #84e467 ; float: right; margin-right: 5px;">
                 following</a>
@@ -39,7 +39,7 @@
         {% for u in peoplemayknow %}
         <div class="singlediv">
             <img src="{{u.img_url}}" alt="profile images" class="post_dp">
-            <span style="margin-left: 5px;">{{u.username|slice:":10"}}</span>
+            <span style="margin-left: 5px;">{{u.username|slice:":6"}}</span>
             <a id='follow{{u.id}}' onclick="follow('{{u.username}}','{{u.id}}')" class="btn  btn-sm"
                 style="background-color: rgb(98, 169, 216) ; float: right; margin-right: 5px;">
                 follow</a>

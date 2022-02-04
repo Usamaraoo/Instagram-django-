@@ -67,12 +67,26 @@ height: 120px;
 border-radius: 50%;
 display: inline;
 object-fit: cover;
+margin-top: 16px;
+}
+.edit_prof{
+    background-color: rgba(236, 236, 236, 0);
+    padding: 8px;
+    border-radius: 7px;
+    border: 1px solid gray;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
 }
 .pst,.flwr,.flwng{
     float: left;
     font-size: 18px;
     margin-right: 20px;
     /* border: 1px solid black; */
+}
+.flwr a:hover,.flwng a:hover{
+color: blue;
 }
 .posts{
     margin-left: 10px;
@@ -85,4 +99,37 @@ object-fit: cover;
     margin-left: 12px;
 object-fit: cover;
 
+}
+
+
+@media only screen and (max-width: 1200px){
+    /*Tablets [601px -> 1200px]*/
+  
+}
+  
+  @media only screen and (max-width: 600px){
+	/*Big smartphones [426px -> 600px]*/
+   
+}
+
+@media only screen and (max-width: 425px){
+	/*Small smartphones [325px -> 425px]*/
+    .profile_img{
+        width: 80px;
+        height: 80px;
+    }
+    .follow_div{
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 375px){
+	/*Small smartphones [325px -> 425px]*/
+    .profile_img{
+        width: 80px;
+        height: 80px;
+    }
+    .follow_div{
+        width: auto;
+    }
 }

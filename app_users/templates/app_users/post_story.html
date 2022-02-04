@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load widget_tweaks %}
-{% block title %}Post Something{% endblock title %}
+{% block title %}Add Story{% endblock title %}
 {% block additionalStyles %}
 <link rel="stylesheet" href="{% static 'app_users/css/post.css'  %}">
 {% endblock %}
@@ -12,8 +12,7 @@
     </div>
     <form method="post" enctype='multipart/form-data'>
         {% csrf_token %}
-        {% render_field form.post_img class="btn imginput" size="60"%}
-        {% render_field form.description class="dscrptn" placeholder="discription...."%}
+        {% render_field form.story_img class="btn imginput" size="60"%}
         <br>
         <input type="submit" value="post" class="btn "
             style="background-color: rgb(98, 169, 216) !important; border: none; margin-left: 170px; width: 200px;">

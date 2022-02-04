@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Post, InstaUser
+from .models import Post, InstaUser, Story
 
 
 class PostForm(forms.ModelForm):
@@ -8,6 +8,12 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['post_img', 'description']
         exclude = ['user']
+
+
+class StoryForm(forms.ModelForm):
+    class Meta:
+        model = Story
+        fields = ['story_img']
 
 
 class LoginForm(forms.Form):

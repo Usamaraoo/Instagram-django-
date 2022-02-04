@@ -29,14 +29,11 @@ class InstaUser(AbstractBaseUser, PermissionsMixin):
         try:
             url = self.social_auth.get(
                 provider='facebook').extra_data['picture']['data']['url']
+
             return url
         except:
             if self.profile_pic.name is '':
-                if self.male is True:
-                    return '/static/imgs/deflt _prof_m.png'
-                else:
-                    return '/static/imgs/deflt_prof_f.png'
-
+                return '/static/imgs/dp.png'
             else:
                 return self.profile_pic.url
 
@@ -88,3 +85,11 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.notify
+
+
+class Story(models.Model):
+    story_img = models.FileField(upload_to='stories')
+    story_user = models.ForeignKey(InstaUser, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.story_user.username

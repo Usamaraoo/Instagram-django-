@@ -12,10 +12,80 @@ h1{
     color: blue;
 }
 .base {
-    /* width: 550px; */
-   
+    width: 41%;
+    margin:auto;
     background-color: white;
-    min-height: 800px;
-  
+    min-height: 100vh;
   }
+
+  @media only screen and (max-width: 1200px){
+    /*Tablets [601px -> 1200px]*/
+    .base{
+        width: 100%;
+    }
+}
   
+  @media only screen and (max-width: 600px){
+	/*Big smartphones [426px -> 600px]*/
+    .base{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 425px){
+	/*Small smartphones [325px -> 425px]*/
+    .base{
+        width: 100%;
+    }
+    .messenger,.logout_logo{
+        width: 20px !important;
+        
+    }
+    .logo{
+        width: 38%;
+    }
+}
+
+@media only screen and (max-width: 375px){
+	/*Small smartphones [325px -> 425px]*/
+    .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        /* width: 100%; */
+        padding-right: var(--bs-gutter-x,0rem) !important;
+        padding-left: var(--bs-gutter-x,0em) !important;
+        /* margin-right: auto; */
+        /* margin-left: auto; */
+    }
+    
+    .base{
+        width: 100%;
+    }
+
+    .messenger,.logout_logo{
+        width: 20px !important;
+    }
+    .logo{
+        width: 38% !important;
+    }
+}
+
+/* nav */
+.con{
+    position: sticky;
+    top: 0%;
+    width: 100%;
+    border-bottom: 1px solid rgb(199, 199, 199);
+    padding: 5px;
+    margin-left: 0px !important;
+}
+.logout_logo{
+    width: 35px;
+}
+
+
+.logo{
+    width: 30%;
+}
+.messenger{
+    width: 35px;
+    float: right;
+}

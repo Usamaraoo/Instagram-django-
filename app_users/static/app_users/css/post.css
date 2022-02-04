@@ -62,4 +62,31 @@ input[type=file] {
 }
   
 
+
+@media only screen and (max-width: 1200px){
+  /*Tablets [601px -> 1200px]*/
+ 
+}
+
+@media only screen and (max-width: 600px){
+/*Big smartphones [426px -> 600px]*/
+
+}
+
+@media only screen and (max-width: 375px){
+/*Small smartphones [325px -> 425px]*/
+.imginput {
+  width: 95%;
+  height: 40px;
+}
+.dscrptn{
+  width: 95%;
+  margin-left: 10px;
+}
+.btn{
+  margin: 0 auto !important;
+  display: block !important;
+}
+}
+
   

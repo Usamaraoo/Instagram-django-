@@ -20,14 +20,18 @@
             <strong><a href="#"> Posts</a></strong>
         </div>
         <div class="flwr">
-            <strong style="margin: 15px;">{{profile_user.followers.count}}</strong>
-            <br>
-            <strong><a href="{% url 'followunfollow' %}"> followers</a></strong>
+            <a href="{% url 'followunfollow' %}">
+                <strong style="margin: 15px;">{{profile_user.followers.count}}</strong>
+                <br>
+                <strong>followers</strong>
+            </a>
         </div>
         <div class="flwng">
-            <strong style="margin: 15px;">{{profile_user.following.count}}</strong>
-            <br>
-            <strong><a href="{% url 'followunfollow' %}"> following</a></strong>
+            <a href="{% url 'followunfollow' %}">
+                <strong style="margin: 15px;">{{profile_user.following.count}}</strong>
+                <br>
+                <strong> following</strong>
+            </a>
         </div>
     </div>
     <h5 style="margin-left: 10px; margin-top: 10px;"><strong>{{profile_user.username}}</strong> </h5>
@@ -45,6 +49,11 @@
         </h4>
     </a>
     <h4 class="flw_btn  btn"><a href="#">message</a></h4>
+</div>
+{% else %}
+<div>
+    <a href="{% url 'set_dp' %}">
+        <button class="edit_prof">Edit Profile</button></a>
 </div>
 {% endif %}
 <!-- END -->

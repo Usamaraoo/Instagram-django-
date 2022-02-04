@@ -1,17 +1,22 @@
+from charset_normalizer import from_fp
+from django.forms import forms
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
 from django.urls.conf import path
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
-from app_users.models import (InstaUser, Post, Comment, Notification)
+from app_users.models import (InstaUser, Post, Comment, Notification, Story)
 from django.contrib.auth.decorators import login_required
-
+from app_users.forms import StoryForm
 # Create your views here.
 
 
 @login_required(login_url='login')
 def homepage_view(request):
-
+    # getting stories for the current user
+    stories = {
+        user: story for user in request.user.following.all() for story in user.story_set.all()}
+    current_user_story = request.user.story_set.all()
     posts = Post.objects.order_by('-gen_time')
     active_not = Notification.objects.filter(
         to_user=request.user, active=True).exists()
@@ -20,7 +25,8 @@ def homepage_view(request):
     # In case user dont't follow any one show people to follow
     flwng = request.user.following.all()
     peoplemayknow = InstaUser.objects.filter(~Q(id__in=[o.id for o in flwng]))
-    context = {'posts': posts, 'peoplemayknow': peoplemayknow}
+    context = {'posts': posts, 'current_user_story': current_user_story,
+               'peoplemayknow': peoplemayknow, 'following': flwng, 'stories': stories}
     return render(request, 'homepage/homepage.html', context)
 
 
@@ -84,3 +90,18 @@ def post_detail(request, pk):
     request.session['active_not'] = False
     context = {'post': post}
     return render(request, 'homepage/postdetail.html', context)
+
+
+# Adding Story for current user
+def add_story(request):
+    form = StoryForm()
+    if request.method == 'POST':
+        form = StoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            print('this is form', form)
+            story = form.save(commit=False)
+            story.story_user = request.user
+            story.save()
+            return redirect('homepage')
+
+    return render(request, 'app_users/post_story.html', {'form': form})

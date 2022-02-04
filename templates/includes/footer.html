@@ -1,17 +1,21 @@
 {% load static %}
 <style>
     .footer {
+        
         position: fixed;
         bottom: 0;
         min-width: 529px;
         border-top: 1px solid gray;
         background-color: rgb(255, 255, 255);
+        padding-left:15px;
+        padding-right:15px;
+        z-index:10;
     }
 
 
     .footer_icons {
-        width: 35px;
-        height: 35px;
+        width: 30px;
+        height: 30px;
     }
 
     .footer_img {
@@ -33,6 +37,39 @@
 
     .row {
         margin-top: 3px !important;
+    }
+
+    @media only screen and (max-width: 1200px){
+        /*Tablets [601px -> 1200px]*/
+        .footer {
+            padding: 4px;
+            min-width:100%;
+        }
+    }
+      
+      @media only screen and (max-width: 600px){
+        /*Big smartphones [426px -> 600px]*/
+        .footer {
+            padding: 4px;
+            min-width:100%;
+        }
+    }
+    
+    @media only screen and (max-width: 425px){
+        /*Small smartphones [325px -> 425px]*/
+        .footer {
+            padding: 4px;
+            min-width:100%;
+        }
+    }
+    
+    @media only screen and (max-width: 375px){
+        /*Small smartphones [325px -> 425px]*/
+        .footer {
+            padding-left:15px;
+            padding-right:15px;
+            min-width:100%;
+        }
     }
 </style>
 

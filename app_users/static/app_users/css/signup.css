@@ -107,7 +107,7 @@ a, a:hover, a:focus, a:active {
   }
   
   .page .container ul li{
-    display: inline;
+    display: none;
     color: #8e9096;
   }
   
@@ -145,7 +145,6 @@ a, a:hover, a:focus, a:active {
   /* footer style */
   .footer{
     bottom: 0;
-    height: 2.5rem;
     margin-top: 50px;
   }
   

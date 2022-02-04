@@ -9,19 +9,60 @@
 
 
 
+
 {# Stories #}
 
 <div class="stories" id="st">
-    {% for user in request.user.following.all %}
-
     <div class="singlestory">
-        <img src="{{user.img_url}}" class="" alt="">
+        <div class="story_plus">
+            <a href="{% url 'add_story' %}">
+                <img src="{{request.user.img_url}}" alt="mystoryadd" style="border:0px;">
+                <img src="{% static 'resource_imgs/plus_icon.png' %}" id="addstory" alt="">
+            </a>
+        </div>
+        <br>
+        <small style="text-alignment:center">Add Story</small>
+    </div>
+    {% if current_user_story %}
+    <div class="singlestory">
+        <img onclick="clicked_soty('{{request.user.id}}','{{current_user_story.0.story_img.url}}','{{user.username}}')"
+            id="storybtn{{user.id}}" src="{{user.img_url}}" class="" alt="">
+        <br>
+        <small>{{user.username|slice:":5"}}</small>
+    </div>
+
+    {% endif %}
+    {% for user,story in stories.items %}
+    <div class="singlestory">
+        <img onclick="clicked_soty('{{user.id}}','{{story.story_img.url}}','{{user.username}}')"
+            id="storybtn{{user.id}}" src="{{user.img_url}}" class="" alt="">
         <br>
         <small>{{user.username|slice:":5"}}</small>
     </div>
     {% endfor %}
 </div>
+
 {# END Stories #}
+
+<!-- Trigger/Open The Modal -->
+
+<!-- The Modal -->
+<div id="storyModal" class="modal">
+
+    <!-- Story Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="myProgress">
+            <div id="myBar"></div>
+        </div>
+        {% comment %} <img src="{{request.user.following.all.2.img_url}}" class="postimg" alt=""> {% endcomment %}
+        <b id="stryusername">name : </b>
+        <img id="storyimg" src="" alt="story" width="80%" height="80%">
+    </div>
+
+</div>
+
+
 {% if request.user.following.all.1 %}
 
 {% for p in posts %}
@@ -111,6 +152,7 @@
 </div>
 <br><br>
 <script>
+
     function follow(username, button_id) {
         $.ajax({
             url: '/ajax_follow',
